@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE student_information SYSTEM "lny4.dtd">
+<?xml-stylesheet type="text/css" href="lny4.css"?>
+
+<information>
+
+
+<vtu>
+<usn>4vv21is052</usn>+
+<name>lakshmi narayana.y</name>
+<college>vvce</college>
+<branch>is</branch>
+<yoj>2021</yoj>
+<email>suhassimha398@gmail.com</email>
+</vtu>
+
+
+<vtu>
+<usn>4vv21is048</usn>
+<name>kruthika g</name>
+<college>vvce</college>
+<branch>is</branch>
+<yoj>2021</yoj>
+<email>kruthikagirish03@gmail.com</email>
+</vtu>
+
+
+
+
+<vtu>
+<usn>4vv21is053</usn>
+<name>lasya m</name>
+<college>vvce</college>
+<branch>is</branch>
+<yoj>2021</yoj>
+<email>lasyamanjunath98@gmail.com</email>
+</vtu>
+</information>

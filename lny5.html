@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myfunction2()
+{
+let num=document.getElementById("num").value;
+const points =num.split(",");
+points.sort(function(a, b){return b - a});
+document.getElementByIdlementbyid("demo1").innerHTML = points ;
+}
+</script>
+</head>
+<body>
+<h2>javascript array sort</h2>
+<p>click the buttons to sort the array numerically.</p>
+enter the numbers seperated by comma :
+<input type="text" id="num"/></br>
+<button onclick="myfunction2()">sort</button>
+<p>descending order:<span id="demo1" label="output values"></span></p>
+</body>
+</html> 
