@@ -1,0 +1,183 @@
+package com.Madan;
+import java.sql.*;
+import java.util.*;
+class Operation
+{
+	void insert(Connection con)
+	{
+		PreparedStatement stmt=null;
+		try
+		{
+			stmt=(PreparedStatement)con.prepareStatement
+					("insert into emp values(?,?,?,?)");
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Enter id of the employee");
+			int id=sc.nextInt();
+			System.out.println("Enter name of the employee");
+			String name=sc.next();
+			System.out.println("Enter salary of the employee");
+			int salary=sc.nextInt();
+			System.out.println("Enter experience of the employee");
+			int experience=sc.nextInt();
+			stmt.setInt(1,id);
+			stmt.setString(2,name);
+			stmt.setInt(3,salary);
+			stmt.setInt(4,experience);
+			stmt.executeUpdate();
+			System.out.println("Record has been inserted successfully");
+		}
+		catch(Exception e) {
+			//TODO: handle exception 
+		}
+		finally
+		{
+			try {
+				stmt.close();
+			}
+			catch(Exception e2)
+			{
+				//TODO: handle exception
+			}
+		}
+	}
+	void update(Connection con)
+	{
+		PreparedStatement stmt=null;
+		try {
+			stmt=(PreparedStatement)con.prepareStatement
+			  		("Update emp set salary=salary+5000 where experience>=3");
+			stmt.executeUpdate();
+			System.out.println("Records have been updated successfully");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exeption caught");
+		}
+		finally
+		{
+			try {
+				stmt.close();
+			}
+			catch(Exception e2)
+			{
+				//TODO: handle exception	
+			}
+		}
+	}
+	void delete(Connection con)
+	{
+		PreparedStatement stmt=null;
+		try {
+			stmt=(PreparedStatement)con.prepareStatement
+					("Delete from emp where id=?");
+			Scanner scanner=new Scanner(System.in);
+			System.out.println("Enter id of the employee to delete");
+			int id=scanner.nextInt();
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			System.out.println("Employee record deleted successfully");
+		}
+		catch(Exception e)
+		{
+			System.out.println("Exception caught");
+		}
+		finally
+		{
+			try
+			{
+				stmt.close();
+			}
+			catch(Exception e2)
+			{
+				// TODO: handle exception
+			}
+		}
+	}
+	void display(Connection con)
+	{
+		PreparedStatement stmt=null;
+		try
+		{
+			stmt=(PreparedStatement)con.prepareStatement("select * from emp");
+			System.out.println("Displaying all the records");
+			ResultSet rs=null;
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				System.out.println("-----------------------------");
+				System.out.println("Id="+rs.getInt(1));
+				System.out.println("Name="+rs.getString(2));
+				System.out.println("Salary="+rs.getInt(3));
+				System.out.println("Experience="+rs.getInt(4));
+				System.out.println("-----------------------------");
+			}
+		}
+		catch(Exception e)
+		{
+			
+		}
+		finally
+		{
+			try
+			{
+				stmt.close();
+			}
+			catch(Exception e2)
+			{
+				// TODO: handle exception
+			}
+		}
+	}
+}
+
+public class JDBCDemo {
+
+	public static void main(String[] args) {
+		Connection con=null;
+		try {
+			System.out.println("***WELCOME TO JDBC CRUD APPLICATION***");
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Driver has been loaded successfully");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/employeedb","root","student");
+			System.out.println("Connection Established Successfully at "+con);
+			int ch;
+			do
+			{
+				System.out.println("Enter 1==>insert 2==>updated 3==>delete 4==>display 5==>stop");
+				System.out.println("Enter your choice");
+				Scanner scanner=new Scanner(System.in);
+				ch=scanner.nextInt();
+				Operation ob=new Operation();
+				switch(ch)
+				{
+				case 1:ob.insert(con);
+						break;
+				case 2:ob.update(con);
+						break;
+				case 3:ob.delete(con);
+						break;
+				case 4:ob.display(con);
+						break;
+				case 5: System.out.println("===Thank you for using our application====");
+						break;		
+				}
+			}while(ch!=5);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally
+		{
+			try 
+			{
+				con.close();
+			}
+			catch(Exception e)
+			{
+				System.out.println("Sql exeption caught");
+			}
+		}
+	}
+
+}
